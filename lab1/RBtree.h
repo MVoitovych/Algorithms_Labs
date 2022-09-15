@@ -346,25 +346,24 @@ void delete(int value, TreeNode **p_root) {
 
 void run() {
     char input_sign;
-    int number = 0;
-    scanf("%d%c", &number);
+    int value = 0;
+    scanf("%d%c", &value);
     printf("root created\n");
-    TreeNode *root = createRoot(number);
+    TreeNode *root = createRoot(value);
     printTree(root);
 
 
     while (true) {
-        scanf("%c %d%c", &input_sign, &number);
+        scanf("%c %d%c", &input_sign, &value);
         printf("===================================\n");
 
         if (input_sign == '+') {
-            add(number, &root);
-
+            add(value, &root);
 
         } else if (input_sign == '-') {
-            delete(number, &root);
+            delete(value, &root);
 
-        } else if(input_sign == 'x'){
+        } else if (input_sign == 'x') {
             return;
         }
 
