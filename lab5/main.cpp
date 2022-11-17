@@ -1,5 +1,6 @@
 #include <iostream>
-#include "unordered_map"
+#include <unordered_map>
+#include <ctime>
 
 using namespace ::std;
 
@@ -38,13 +39,40 @@ bool boyerMooreHorspoolAlgorithm(string &hay_bale, string &needle) {
 
 }
 
+void test(string &hay_bale, string &needle, bool(*func)(string &, string &)) {
+    clock_t start = clock();
+    bool match = func(hay_bale, needle);
+    cout << (match ? "match " : "no match") << "\n";
+    clock_t end = clock();
+    cout << ((double) (end - start)) / CLOCKS_PER_SEC << " seconds\n============================\n";
+}
+
+void getStrings(string &hay_bale, string &needle) {
+    getline(cin, hay_bale);
+    getline(cin, needle);
+
+    cout << hay_bale.size() << " bale size\n";
+    cout << needle.size() << " needle size\n";
+}
+
 
 int main() {
 
-    string hay_bale = "neneedleedleqwefrgterwedQERFWQEFQWFneedle";
-    string needle = "needle";
+    freopen("cond.txt", "r", stdin);
 
-    cout << (boyerMooreHorspoolAlgorithm(hay_bale, needle) ? "match " : "no match") << "\n";
+    string hay_bale, needle;
+    
+    cout << "BAD variant O(M*N) \n";
+    getStrings(hay_bale, needle);
+    test(hay_bale, needle, &boyerMooreHorspoolAlgorithm);
+
+    cout << "GOOD variant O(M/N) \n";
+    getStrings(hay_bale, needle);
+    test(hay_bale, needle, &boyerMooreHorspoolAlgorithm);
+
+    cout << "Random generated text variant O(M/E) where E = number of possible characters\n";
+    getStrings(hay_bale, needle);
+    test(hay_bale, needle, &boyerMooreHorspoolAlgorithm);
 
 
     return 0;
